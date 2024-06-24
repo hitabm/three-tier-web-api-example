@@ -26,14 +26,12 @@ namespace StudentExample.BLL.Services
                 }
                 else
                 {
-                    var random = new Random();
                     var newStudent = new Student
                     {
                         Birthdate = student.Birthdate,
                         FirstName = student.FirstName,
                         LastName = student.LastName,
                         StudentNo = student.StudentNo,
-                        Id = random.Next(0, 100),
                     };
                     return await _student.Create(newStudent);
                 }
