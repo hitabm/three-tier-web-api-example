@@ -13,15 +13,43 @@ namespace StudentExample.PL.Controllers
         [HttpGet]
         public IActionResult AllStudents()
         {
-            var alStudents = _studentService.GetStudents();
-            return Ok(alStudents);
+            try
+            {
+                var alStudents = _studentService.GetStudents();
+                return Ok(alStudents);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddStudent([FromBody] StudentAddModel studentAddModel)
         {
-            await _studentService.AddStudent(studentAddModel);
-            return Ok();
+            try
+            {
+                await _studentService.AddStudent(studentAddModel);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateStudent([FromBody] StudentUpdateModel studentUpdateModel)
+        {
+            try
+            {
+                _studentService.UpdateStudent(studentUpdateModel);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

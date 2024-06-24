@@ -61,13 +61,20 @@ namespace StudentExample.BLL.Services
             }
         }
 
-        public void UpdateStudent(Student? student)
+        public void UpdateStudent(StudentUpdateModel? student)
         {
             try
             {
                 if (student != null)
                 {
-                    _student.Update(student);
+                    var exisitingStudent = _student.GetById(student.Id);
+                    if (exisitingStudent != null)
+                    {
+                        exisitingStudent.FirstName = student.FirstName;
+                        exisitingStudent.LastName = student.LastName;
+                        exisitingStudent.Birthdate = student.Birthdate;
+                        _student.Update(exisitingStudent);
+                    }
                 }
             }
             catch
