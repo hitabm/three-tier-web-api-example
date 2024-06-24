@@ -11,7 +11,7 @@ namespace StudentExample.PL.Controllers
         private readonly StudentService _studentService = studentService;
 
         [HttpGet]
-        public IActionResult AllStudents()
+        public IActionResult All()
         {
             try
             {
@@ -25,7 +25,7 @@ namespace StudentExample.PL.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStudent([FromBody] StudentAddModel studentAddModel)
+        public async Task<IActionResult> Add([FromBody] StudentAddModel studentAddModel)
         {
             try
             {
@@ -39,11 +39,25 @@ namespace StudentExample.PL.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateStudent([FromBody] StudentUpdateModel studentUpdateModel)
+        public IActionResult Update([FromBody] StudentUpdateModel studentUpdateModel)
         {
             try
             {
                 _studentService.UpdateStudent(studentUpdateModel);
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _studentService.DeleteStudent(id);
                 return Ok();
             }
             catch
