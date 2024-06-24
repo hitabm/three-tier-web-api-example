@@ -94,5 +94,17 @@ namespace StudentExample.BLL.Services
                 throw;
             }
         }
+
+        public Student? FindStudent(int id)
+        {
+            try
+            {
+                return _student.GetById(id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

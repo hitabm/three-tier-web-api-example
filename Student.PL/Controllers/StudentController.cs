@@ -65,5 +65,19 @@ namespace StudentExample.PL.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpGet]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var student = _studentService.FindStudent(id);
+                return Ok(student);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
